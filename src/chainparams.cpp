@@ -103,11 +103,11 @@ public:
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         consensus.BIP65Height = 388381; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.BIP66Height = 363725; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
-        consensus.BTGHeight = 491407; // Around 10/25/2017 12:00 UTC
-        consensus.BTGPremineWindow = 8000;
-        consensus.BTGZawyLWMAHeight = 536200; // Around 07/01/2018
-        consensus.BTGEquihashForkHeight = 536200; // Around 07/01/2018
-        consensus.BTGPremineEnforceWhitelist = true;
+        consensus.BTGVHeight = 491407; // Around 10/25/2017 12:00 UTC
+        consensus.BTGVPremineWindow = 8000;
+        consensus.BTGVZawyLWMAHeight = 536200; // Around 07/01/2018
+        consensus.BTGVEquihashForkHeight = 536200; // Around 07/01/2018
+        consensus.BTGVPremineEnforceWhitelist = true;
         consensus.powLimit = uint256S("0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("0000000fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -123,7 +123,7 @@ public:
         consensus.nZawyLwmaMinDenominatorLegacy = 10;
         consensus.nZawyLwmaMinDenominator = 10;
         consensus.bZawyLwmaSolvetimeLimitation = true;
-        consensus.BTGMaxFutureBlockTime = 12 * 10 * 60; // 120 mins
+        consensus.BTGVMaxFutureBlockTime = 12 * 10 * 60; // 120 mins
 
         consensus.nPowTargetTimespanLegacy = 14 * 24 * 60 * 60; // 10 minutes
         consensus.nPowTargetSpacing = 10 * 60;
@@ -231,11 +231,11 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = -1;
         consensus.BIP66Height = -1;
-        consensus.BTGHeight = 1;
-        consensus.BTGZawyLWMAHeight = -1; // Activated on testnet
-        consensus.BTGEquihashForkHeight = 14300;
-        consensus.BTGPremineWindow = 50;
-        consensus.BTGPremineEnforceWhitelist = false;
+        consensus.BTGVHeight = 1;
+        consensus.BTGVZawyLWMAHeight = -1; // Activated on testnet
+        consensus.BTGVEquihashForkHeight = 14300;
+        consensus.BTGVPremineWindow = 50;
+        consensus.BTGVPremineEnforceWhitelist = false;
         consensus.powLimit = uint256S("0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = uint256S("00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -251,7 +251,7 @@ public:
         consensus.nZawyLwmaMinDenominatorLegacy = 3;
         consensus.nZawyLwmaMinDenominator = 10;
         consensus.bZawyLwmaSolvetimeLimitation = false;
-        consensus.BTGMaxFutureBlockTime = 7 * 10 * 60; // 70 mins
+        consensus.BTGVMaxFutureBlockTime = 7 * 10 * 60; // 70 mins
 
         consensus.nPowTargetTimespanLegacy = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 10 * 60;
@@ -347,11 +347,11 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
-        consensus.BTGHeight = 2000;
-        consensus.BTGZawyLWMAHeight = -1; // Activated on regtest
-        consensus.BTGEquihashForkHeight = 2001;
-        consensus.BTGPremineWindow = 10;
-        consensus.BTGPremineEnforceWhitelist = false;
+        consensus.BTGVHeight = 2000;
+        consensus.BTGVZawyLWMAHeight = -1; // Activated on regtest
+        consensus.BTGVEquihashForkHeight = 2001;
+        consensus.BTGVPremineWindow = 10;
+        consensus.BTGVPremineEnforceWhitelist = false;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitStart = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.powLimitLegacy = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -366,7 +366,7 @@ public:
         consensus.nZawyLwmaMinDenominatorLegacy = 10;
         consensus.nZawyLwmaMinDenominator = 10;
         consensus.bZawyLwmaSolvetimeLimitation = true;
-        consensus.BTGMaxFutureBlockTime = 7 * 10 * 60; // 70 mins
+        consensus.BTGVMaxFutureBlockTime = 7 * 10 * 60; // 70 mins
 
         consensus.nPowTargetTimespanLegacy = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 10 * 60;
@@ -491,11 +491,11 @@ unsigned int CChainParams::EquihashSolutionWidth(int height) const
 bool CChainParams::IsPremineAddressScript(const CScript& scriptPubKey, uint32_t height) const {
     static const int LOCK_TIME = 3 * 365 * 24 * 3600;  // 3 years
     static const int LOCK_STAGES = 3 * 12;  // Every month for 3 years
-    assert((uint32_t)consensus.BTGHeight <= height &&
-           height < (uint32_t)(consensus.BTGHeight + consensus.BTGPremineWindow));
-    int block = height - consensus.BTGHeight;
-    int num_unlocked = consensus.BTGPremineWindow * 40 / 100;  // 40% unlocked.
-    int num_locked = consensus.BTGPremineWindow - num_unlocked;  // 60% time-locked.
+    assert((uint32_t)consensus.BTGVHeight <= height &&
+           height < (uint32_t)(consensus.BTGVHeight + consensus.BTGVPremineWindow));
+    int block = height - consensus.BTGVHeight;
+    int num_unlocked = consensus.BTGVPremineWindow * 40 / 100;  // 40% unlocked.
+    int num_locked = consensus.BTGVPremineWindow - num_unlocked;  // 60% time-locked.
     int stage_lock_time = LOCK_TIME / LOCK_STAGES / consensus.nPowTargetSpacing;
     int stage_block_height = num_locked / LOCK_STAGES;
     const std::vector<std::string> pubkeys = vPreminePubkeys[block % vPreminePubkeys.size()];  // Round robin.
@@ -505,7 +505,7 @@ bool CChainParams::IsPremineAddressScript(const CScript& scriptPubKey, uint32_t 
     } else {
         int locked_block = block - num_unlocked;
         int stage = locked_block / stage_block_height;
-        int lock_time = consensus.BTGHeight + stage_lock_time * (1 + stage);
+        int lock_time = consensus.BTGVHeight + stage_lock_time * (1 + stage);
         redeem_script = CltvMultiSigScript(pubkeys, lock_time);
     }
     CScriptID redeem_script_id(redeem_script);

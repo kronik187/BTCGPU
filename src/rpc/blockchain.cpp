@@ -69,7 +69,7 @@ double GetDifficulty(const CBlockIndex* blockindex)
     uint32_t bits = blockindex->nBits;
     uint32_t powLimit = 0;
 
-    if (blockindex->nHeight >= Params().GetConsensus().BTGHeight) {
+    if (blockindex->nHeight >= Params().GetConsensus().BTGVHeight) {
         powLimit = UintToArith256(Params().GetConsensus().powLimit).GetCompact();
     } else {
         powLimit = 0x1d00ffff;
@@ -137,7 +137,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
         confirmations = chainActive.Height() - blockindex->nHeight + 1;
     result.pushKV("confirmations", confirmations);
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    int ser_flags = (blockindex->nHeight < consensusParams.BTGHeight) ? SERIALIZE_BLOCK_LEGACY : 0;
+    int ser_flags = (blockindex->nHeight < consensusParams.BTGVHeight) ? SERIALIZE_BLOCK_LEGACY : 0;
     result.pushKV("strippedsize", (int)::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS | ser_flags));
     result.pushKV("size", (int)::GetSerializeSize(block, SER_NETWORK, PROTOCOL_VERSION | ser_flags));
     result.pushKV("weight", (int)::GetBlockWeight(block, consensusParams));

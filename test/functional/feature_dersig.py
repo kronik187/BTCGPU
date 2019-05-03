@@ -101,7 +101,7 @@ class BIP66Test(BitcoinTestFramework):
 
         # First we show that this tx is valid except for DERSIG by getting it
         # rejected from the mempool for exactly that reason.
-        # The reject-reason for BTG is different from it for BTC because SCRIPT_VERIFY_STRICTENC is
+        # The reject-reason for BTGV is different from it for BTC because SCRIPT_VERIFY_STRICTENC is
         # enabled as a mandatory script verification step.
         assert_equal(
             [{'txid': spendtx.hash, 'allowed': False, 'reject-reason': '16: mandatory-script-verify-flag-failed (Non-canonical DER signature)'}],

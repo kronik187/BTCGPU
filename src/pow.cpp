@@ -24,30 +24,30 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     assert(pindexLast != nullptr);
     int nHeight = pindexLast->nHeight + 1;
-    bool postfork = nHeight >= params.BTGHeight;
+    bool postfork = nHeight >= params.BTGVHeight;
 
     if (postfork == false) {
         // Original Bitcoin PoW.
         return BitcoinGetNextWorkRequired(pindexLast, pblock, params);
     }
-    else if (nHeight < params.BTGHeight + params.BTGPremineWindow) {
+    else if (nHeight < params.BTGVHeight + params.BTGVPremineWindow) {
         // PoW limit for premine period.
         unsigned int nProofOfWorkLimit = UintToArith256(params.PowLimit(true)).GetCompact();
         return nProofOfWorkLimit;
     }
-    else if (nHeight < params.BTGHeight + params.BTGPremineWindow + params.nDigishieldAveragingWindow) {
+    else if (nHeight < params.BTGVHeight + params.BTGVPremineWindow + params.nDigishieldAveragingWindow) {
         // Pow limit start for warm-up period.
         return UintToArith256(params.powLimitStart).GetCompact();
     }
-    else if (nHeight < params.BTGZawyLWMAHeight) {
+    else if (nHeight < params.BTGVZawyLWMAHeight) {
         // Regular Digishield v3.
         return DigishieldGetNextWorkRequired(pindexLast, pblock, params);
-    } else if (nHeight < params.BTGEquihashForkHeight) {
+    } else if (nHeight < params.BTGVEquihashForkHeight) {
         // Zawy's LWMA (testnet launch).
         return LwmaGetNextWorkRequired(pindexLast, pblock, params);
-    } else if (nHeight < params.BTGEquihashForkHeight + params.nZawyLwmaAveragingWindow) {
+    } else if (nHeight < params.BTGVEquihashForkHeight + params.nZawyLwmaAveragingWindow) {
         // Reduce the difficulty of the first forked block by 100x and keep it for N blocks.
-        if (nHeight == params.BTGEquihashForkHeight) {
+        if (nHeight == params.BTGVEquihashForkHeight) {
             return ReduceDifficultyBy(pindexLast, 100, params);
         } else {
             return pindexLast->nBits;
@@ -250,7 +250,7 @@ bool CheckEquihashSolution(const CBlockHeader *pblock, const CChainParams& param
 
     // Hash state
     blake2b_state state;
-    EhInitialiseState(n, k, state, params.EquihashUseBTGSalt(height));
+    EhInitialiseState(n, k, state, params.EquihashUseBTGVSalt(height));
 
     // I = the block header minus nonce and solution.
     CEquihashInput I{*pblock};

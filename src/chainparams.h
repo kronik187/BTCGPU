@@ -74,7 +74,7 @@ public:
     unsigned int EquihashK() const { return nEquihashK; }
     unsigned int EquihashN(int height) const
     {
-        if(height >= consensus.BTGEquihashForkHeight) {
+        if(height >= consensus.BTGVEquihashForkHeight) {
             return nEquihashNnew;
         } else {
             return nEquihashN;
@@ -82,15 +82,15 @@ public:
     }
     unsigned int EquihashK(int height) const
     {
-        if(height >= consensus.BTGEquihashForkHeight) {
+        if(height >= consensus.BTGVEquihashForkHeight) {
             return nEquihashKnew;
         } else {
             return nEquihashK;
         }
     }
-    bool EquihashUseBTGSalt(int height) const
+    bool EquihashUseBTGVSalt(int height) const
     {
-        return height >= consensus.BTGEquihashForkHeight;
+        return height >= consensus.BTGVEquihashForkHeight;
     }
     unsigned int EquihashSolutionWidth(int height) const;
 

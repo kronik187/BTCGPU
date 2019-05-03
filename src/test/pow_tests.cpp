@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(ReduceDifficultyBy_test)
     const auto chain_params = CreateChainParams(CBaseChainParams::MAIN);
     const auto& consensus = chain_params->GetConsensus();
     CBlockIndex last_block;
-    last_block.nHeight = consensus.BTGEquihashForkHeight - 1;
+    last_block.nHeight = consensus.BTGVEquihashForkHeight - 1;
 
     // Reach the PoW limit
     last_block.nBits = 0x1f00ffff;

@@ -38,7 +38,7 @@ def sig(x):
         return 0
 
 
-class BTGTimeLockTest(BitcoinTestFramework):
+class BTGVTimeLockTest(BitcoinTestFramework):
 
     def set_test_params(self):
         self.num_nodes = 1
@@ -138,4 +138,4 @@ class BTGTimeLockTest(BitcoinTestFramework):
 
 
 if __name__ == '__main__':
-    BTGTimeLockTest().main()
+    BTGVTimeLockTest().main()

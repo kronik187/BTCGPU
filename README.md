@@ -13,7 +13,7 @@ Bitcoin Gold preserves and implements Bitcoin features such as SegWit, which ena
 - Replay protection (SIGHASH_FORK_ID)
 - Unique wallet addresses (prefixes of G and A)
 
-Although BTG was bootstrapped on 12 Nov to create an entirely new network, it contains the entire Bitcoin blockchain until block 491406. As a result, Bitcoin Gold became a full fork with all Bitcoin transaction history since 2009. Any Bitcoin wallet address which held Bitcoin in BTC block 491406 before the fork held an equal number of Bitcoin Gold in BTG block 491407 after the fork.
+Although BTGV was bootstrapped on 12 Nov to create an entirely new network, it contains the entire Bitcoin blockchain until block 491406. As a result, Bitcoin Gold became a full fork with all Bitcoin transaction history since 2009. Any Bitcoin wallet address which held Bitcoin in BTC block 491406 before the fork held an equal number of Bitcoin Gold in BTGV block 491407 after the fork.
 
 ## Releases
 

@@ -1,5 +1,5 @@
-#ifndef BITCOIN_TEST_BTG_CLTV_MULTISIG_DATA_H
-#define BITCOIN_TEST_BTG_CLTV_MULTISIG_DATA_H
+#ifndef BITCOIN_TEST_BTGV_CLTV_MULTISIG_DATA_H
+#define BITCOIN_TEST_BTGV_CLTV_MULTISIG_DATA_H
 
 #include <vector>
 
@@ -28,4 +28,4 @@ std::vector<CltvMultiSigTestData> GetCltvMultiSigTestData()
     return data;
 }
 
-#endif // BITCOIN_TEST_BTG_CLTV_MULTISIG_DATA_H
+#endif // BITCOIN_TEST_BTGV_CLTV_MULTISIG_DATA_H

@@ -26,7 +26,7 @@ import time
 from test_framework.siphash import siphash256
 from test_framework.util import hex_str_to_bytes, bytes_to_hex_str
 
-BTG_REGTEST_HARDFORK_HEIGHT = 2000
+BTGV_REGTEST_HARDFORK_HEIGHT = 2000
 
 MIN_VERSION_SUPPORTED = 60001
 MY_VERSION = 70016  # past bip-31 for ping/pong
@@ -605,7 +605,7 @@ class CBlockHeader(object):
 
     def calc_sha256(self):
         if self.sha256 is None:
-            if self.nHeight < BTG_REGTEST_HARDFORK_HEIGHT:
+            if self.nHeight < BTGV_REGTEST_HARDFORK_HEIGHT:
                 r = self.serialize_header(legacy=True)
             else:
                 r = self.serialize_header(legacy=False)

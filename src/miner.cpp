@@ -168,7 +168,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
               GetBlockWeight(*pblock, chainparams.GetConsensus()), nBlockTx, nFees, nBlockSigOpsCost);
 
     arith_uint256 nonce;
-    if (nHeight >= params.BTGHeight) {
+    if (nHeight >= params.BTGVHeight) {
         // Randomise nonce for new block foramt.
         nonce = UintToArith256(GetRandHash());
         // Clear the top and bottom 16 bits (for local use as thread flags and counters)

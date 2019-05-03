@@ -59,16 +59,16 @@ struct Params {
     /** Block height at which BIP66 becomes active */
     int BIP66Height;
     /** Block height at which Bitcoin GPU hard fork becomes active */
-    int BTGHeight;
+    int BTGVHeight;
     /** Block height at which Zawy's LWMA difficulty algorithm becomes active */
-    int BTGZawyLWMAHeight;
+    int BTGVZawyLWMAHeight;
     /** Block height at which Equihash<144,5> becomes active */
-    int BTGEquihashForkHeight;
+    int BTGVEquihashForkHeight;
     /** Limit BITCOIN_MAX_FUTURE_BLOCK_TIME **/
-    int64_t BTGMaxFutureBlockTime;
+    int64_t BTGVMaxFutureBlockTime;
     /** Premining blocks for Bitcoin GPU hard fork **/
-    int BTGPremineWindow;
-    bool BTGPremineEnforceWhitelist;
+    int BTGVPremineWindow;
+    bool BTGVPremineEnforceWhitelist;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
@@ -114,12 +114,12 @@ struct Params {
     int64_t nZawyLwmaMinDenominatorLegacy;
 
     int64_t ZawyLwmaAdjustedWeight(int height) const {
-        return (height >= BTGEquihashForkHeight)
+        return (height >= BTGVEquihashForkHeight)
             ? nZawyLwmaAdjustedWeight
             : nZawyLwmaAdjustedWeightLegacy;
     }
     int64_t ZawyLwmaMinDenominator(int height) const {
-        return (height >= BTGEquihashForkHeight)
+        return (height >= BTGVEquihashForkHeight)
             ? nZawyLwmaMinDenominator
             : nZawyLwmaMinDenominatorLegacy;
     }

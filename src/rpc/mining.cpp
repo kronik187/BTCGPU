@@ -140,7 +140,7 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
             LOCK(cs_main);
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
         }
-        if (pblock->nHeight < (uint32_t)params.GetConsensus().BTGHeight) {
+        if (pblock->nHeight < (uint32_t)params.GetConsensus().BTGVHeight) {
             // Solve sha256d.
             nInnerLoopMask = nInnerLoopBitcoinMask;
             nInnerLoopCount = nInnerLoopBitcoinCount;
@@ -156,7 +156,7 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
             n = params.EquihashN(pblock->nHeight);
             k = params.EquihashK(pblock->nHeight);
             blake2b_state eh_state;
-            EhInitialiseState(n, k, eh_state, params.EquihashUseBTGSalt(pblock->nHeight));
+            EhInitialiseState(n, k, eh_state, params.EquihashUseBTGVSalt(pblock->nHeight));
 
             // I = the block header minus nonce and solution.
             CEquihashInput I{*pblock};
@@ -286,7 +286,7 @@ static UniValue getmininginfo(const JSONRPCRequest& request)
 }
 
 
-// NOTE: Unlike wallet RPC (which use BTG values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
+// NOTE: Unlike wallet RPC (which use BTGV values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
 static UniValue prioritisetransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 3)

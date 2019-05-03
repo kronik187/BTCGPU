@@ -17,9 +17,9 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTG);
-    unitlist.append(mBTG);
-    unitlist.append(uBTG);
+    unitlist.append(BTGV);
+    unitlist.append(mBTGV);
+    unitlist.append(uBTGV);
     unitlist.append(SAT);
     return unitlist;
 }
@@ -28,9 +28,9 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTG:
-    case mBTG:
-    case uBTG:
+    case BTGV:
+    case mBTGV:
+    case uBTGV:
     case SAT:
         return true;
     default:
@@ -42,9 +42,9 @@ QString BitcoinUnits::longName(int unit)
 {
     switch(unit)
     {
-    case BTG: return QString("BTG");
-    case mBTG: return QString("mBTG");
-    case uBTG: return QString::fromUtf8("μBTG (bits)");
+    case BTGV: return QString("BTGV");
+    case mBTGV: return QString("mBTGV");
+    case uBTGV: return QString::fromUtf8("μBTGV (bits)");
     case SAT: return QString("Satoshi (sat)");
     default: return QString("???");
     }
@@ -54,7 +54,7 @@ QString BitcoinUnits::shortName(int unit)
 {
     switch(unit)
     {
-    case uBTG: return QString::fromUtf8("bits");
+    case uBTGV: return QString::fromUtf8("bits");
     case SAT: return QString("sat");
     default: return longName(unit);
     }
@@ -64,9 +64,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTG: return QString("Bitcoins");
-    case mBTG: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTG: return QString("Micro-Bitcoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case BTGV: return QString("Bitcoins");
+    case mBTGV: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
+    case uBTGV: return QString("Micro-Bitcoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
@@ -76,9 +76,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTG: return 100000000;
-    case mBTG: return 100000;
-    case uBTG: return 100;
+    case BTGV: return 100000000;
+    case mBTGV: return 100000;
+    case uBTGV: return 100;
     case SAT: return 1;
     default: return 100000000;
     }
@@ -88,9 +88,9 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTG: return 8;
-    case mBTG: return 5;
-    case uBTG: return 2;
+    case BTGV: return 8;
+    case mBTGV: return 5;
+    case uBTGV: return 2;
     case SAT: return 0;
     default: return 0;
     }

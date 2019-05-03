@@ -32,10 +32,10 @@ enum
 enum
 {
     FORKID_BCC = 0,
-    FORKID_BTG = 79, // Atomic number AU
+    FORKID_BTGV = 79, // Atomic number AU
 };
 
-static const int FORKID_IN_USE = FORKID_BTG;
+static const int FORKID_IN_USE = FORKID_BTGV;
 
 /** Script verification flags.
  *
@@ -126,7 +126,7 @@ enum
     //
     SCRIPT_VERIFY_CONST_SCRIPTCODE = (1U << 16),
 
-    // Allow NON_FORKID in legacy tests and blocks under BTG hard fork height
+    // Allow NON_FORKID in legacy tests and blocks under BTGV hard fork height
     //
     SCRIPT_ALLOW_NON_FORKID = (1U << 17),
 };
